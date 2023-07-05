@@ -6,7 +6,10 @@ SRCS = 	main.c \
 		ft_readline.c \
 		lexer/lexer.c \
 		lexer/lexer_utils.c \
-		lexer/lexer_utils2.c
+		lexer/lexer_utils2.c \
+		parser/parser.c \
+		parser/parser_utils.c \
+		parser/parser_utils2.c
 
 OBJS = $(SRCS:%.c=%.o)
 
