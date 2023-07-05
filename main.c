@@ -42,6 +42,7 @@ int main(void)
 	t_token *token_list;
 	t_node *root;
 	char **strs;
+	t_varlist varlist;
 
 	line = wrap_readline(NULL);
 	// printf("%s\n", line);
@@ -55,6 +56,6 @@ int main(void)
 	print_tree(root);
 	root = expand(root);
 	strs = converter(root);
-	(void)strs;
+	pipex(strs, &varlist);
 	return (0);
 }
