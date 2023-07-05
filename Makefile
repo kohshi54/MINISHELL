@@ -17,7 +17,9 @@ SRCS = 	main.c \
 		expander/expander_split.c \
 		expander/expander_split_utils.c \
 		expander/expander_removal.c \
-		expander/expander_removal_utils.c
+		expander/expander_removal_utils.c \
+		converter/converter.c \
+		converter/converter_utils.c
 
 OBJS = $(SRCS:%.c=%.o)
 

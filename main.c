@@ -41,6 +41,7 @@ int main(void)
 	char *line;
 	t_token *token_list;
 	t_node *root;
+	char **strs;
 
 	line = wrap_readline(NULL);
 	// printf("%s\n", line);
@@ -52,5 +53,8 @@ int main(void)
 	if (root == NULL)
 		return (0);
 	print_tree(root);
+	root = expand(root);
+	strs = converter(root);
+	(void)strs;
 	return (0);
 }
