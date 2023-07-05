@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_removal_utils.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 21:26:34 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/05 21:27:17 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "expander.h"
 
-char *integrate_list_to_line(t_word2 *cur)
+char	*integrate_list_to_line(t_word2 *cur)
 {
-	char *line;
-	t_word2 *next;
-	char *tmp;
+	char	*line;
+	t_word2	*next;
+	char	*tmp;
 
 	line = NULL;
 	while (cur)
@@ -23,10 +35,10 @@ char *integrate_list_to_line(t_word2 *cur)
 	return (line);
 }
 
-t_word2 *append_new_node(t_word2 *prev, char *str, size_t num)
+t_word2	*append_new_node(t_word2 *prev, char *str, size_t num)
 {
-	t_word2 *cur;
-	char *tmp;
+	t_word2	*cur;
+	char	*tmp;
 
 	cur = ft_calloc(1, sizeof(t_word2));
 	cur->str = ft_strndup(str, num);
@@ -48,9 +60,9 @@ t_word2 *append_new_node(t_word2 *prev, char *str, size_t num)
 	return (cur);
 }
 
-char *sweep_line(char *line)
+char	*sweep_line(char *line)
 {
-	int quote_flg;
+	int	quote_flg;
 
 	quote_flg = NONE;
 	while (*line)
@@ -62,28 +74,28 @@ char *sweep_line(char *line)
 		else if (quote_flg == SINGLE && *line == SINGLE_QUOTE)
 		{
 			line++;
-			break;
+			break ;
 		}
 		else if (quote_flg == DOUBLE && *line == DOUBLE_QUOTE)
 		{
 			line++;
-			break;
+			break ;
 		}
 		else if (quote_flg == NONE)
 		{
 			line++;
-			break;
+			break ;
 		}
 		line++;
 	}
 	return (line);
 }
 
-char *removal(char *line)
+char	*removal(char *line)
 {
-	t_word2 head;
-	char *start;
-	t_word2 *cur;
+	t_word2	head;
+	char	*start;
+	t_word2	*cur;
 
 	cur = &head;
 	while (*line)

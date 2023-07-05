@@ -34,3 +34,38 @@ char *ft_strjoin_null_accept(char *s1, char *s2)
 	ft_memcpy(ptr + len1, s2, len2 + 1);
 	return (ptr);
 }
+
+bool	is_env_assignable(char c)
+{
+	return (ft_isalpha(c) || ft_isdigit(c) || c == '_');
+}
+
+void	update_quote_flg(int *quote_flg, char c)
+{
+	if (*quote_flg == NONE && c == SINGLE_QUOTE)
+		*quote_flg = SINGLE;
+	else if (*quote_flg == NONE && c == DOUBLE_QUOTE)
+		*quote_flg = DOUBLE;
+	else if (*quote_flg == SINGLE && c == SINGLE_QUOTE)
+		*quote_flg = NONE;
+	else if (*quote_flg == DOUBLE && c == DOUBLE_QUOTE)
+		*quote_flg = NONE;
+}
+
+char	*make_word(t_word *cur)
+{
+	char	*line;
+
+	line = NULL;
+	while (cur)
+	{
+		ft_printf("str: %s\n", cur->str);
+		if (cur->in_single_quote == false && cur->str[0] == '$')
+			cur->str = ft_getenviron(&(cur->str[1]));
+		ft_printf("exp: %s\n", cur->str);
+		if (cur->str)
+			line = ft_strjoin_null_accept(line, cur->str);
+		cur = cur->next;
+	}
+	return (line);
+}

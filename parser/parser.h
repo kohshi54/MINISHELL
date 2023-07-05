@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 19:54:24 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 20:02:44 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/05 21:09:29 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_node
 	t_cmd_node		*cmd;
 }	t_node;
 
-t_node		*parse(t_token *token);
-void		evaluate(t_node *cur);
-
 extern char	**environ;
+
+/* parser.c */
+t_node		*parse(t_token *token);
 
 /* parser_utils.c */
 bool		check_pipe_exist(t_token *token);

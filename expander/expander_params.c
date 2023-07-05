@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_params.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 21:15:29 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/05 21:19:08 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "expander.h"
 
 /*
-The '$' character is used to introduce parameter expansion, command substitution, or arithmetic evaluation.
+The '$' character is used to introduce parameter expansion, 
+command substitution, or arithmetic evaluation.
 If an unquoted '$' is followed by a character that is not one of the following:
 ・A numeric character
 ・The name of one of the special parameters (see Special Parameters)
@@ -12,43 +25,7 @@ If an unquoted '$' is followed by a character that is not one of the following:
 In minishell, only numeric character is considered.
 */
 
-char *make_word(t_word *cur)
-{
-	char *line;
-
-	line = NULL;
-	while (cur)
-	{
-		ft_printf("str: %s\n", cur->str);
-		if (cur->in_single_quote == false && cur->str[0] == '$')
-			cur->str = ft_getenviron(&(cur->str[1]));
-		ft_printf("exp: %s\n", cur->str);
-		if (cur->str)
-			line = ft_strjoin_null_accept(line, cur->str);
-		cur = cur->next;
-	}
-	// printf("expanded line: %s\n", line);
-	return (line);
-}
-
-bool is_env_assignable(char c)
-{
-	return (ft_isalpha(c) || ft_isdigit(c) || c == '_');
-}
-
-void update_quote_flg(int *quote_flg, char c)
-{
-	if (*quote_flg == NONE && c == SINGLE_QUOTE)
-		*quote_flg = SINGLE;
-	else if (*quote_flg == NONE && c == DOUBLE_QUOTE)
-		*quote_flg = DOUBLE;
-	else if (*quote_flg == SINGLE && c == SINGLE_QUOTE)
-		*quote_flg = NONE;
-	else if (*quote_flg == DOUBLE && c == DOUBLE_QUOTE)
-		*quote_flg = NONE;
-}
-
-void scan_param(char **line, int *quote_flg)
+void	scan_param(char **line, int *quote_flg)
 {
 	(*line)++;
 	while (is_env_assignable(**line) == true)
@@ -58,7 +35,7 @@ void scan_param(char **line, int *quote_flg)
 	}
 }
 
-void scan_line(char **line, int *quote_flg)
+void	scan_line(char **line, int *quote_flg)
 {
 	while (**line && **line != '$')
 	{
@@ -67,12 +44,12 @@ void scan_line(char **line, int *quote_flg)
 	}
 }
 
-char *find_params_and_replace(char *line)
+char	*find_params_and_replace(char *line)
 {
-	t_word head;
-	char *start;
-	t_word *cur;
-	int quote_flg;
+	t_word	head;
+	char	*start;
+	t_word	*cur;
+	int		quote_flg;
 
 	cur = &head;
 	quote_flg = NONE;
@@ -88,9 +65,9 @@ char *find_params_and_replace(char *line)
 	return (make_word(head.next));
 }
 
-void execute_parameter_expansion(t_cmd_node *cur_cmd)
+void	execute_parameter_expansion(t_cmd_node *cur_cmd)
 {
-	char *tmp;
+	char	*tmp;
 
 	while (cur_cmd)
 	{
@@ -99,7 +76,7 @@ void execute_parameter_expansion(t_cmd_node *cur_cmd)
 			if (cur_cmd->next)
 			{
 				cur_cmd = cur_cmd->next->next;
-				continue;
+				continue ;
 			}
 		}
 		tmp = cur_cmd->str;
@@ -109,7 +86,7 @@ void execute_parameter_expansion(t_cmd_node *cur_cmd)
 	}
 }
 
-void expand_params(t_node *cur)
+void	expand_params(t_node *cur)
 {
 	if (cur->left)
 		expand_params(cur->left);

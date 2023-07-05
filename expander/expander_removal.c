@@ -1,16 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_removal.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 21:25:50 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/05 21:26:11 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "expander.h"
 
 /*
 2.6.7 Quote Removal
 The quote characters ( <backslash>, single-quote, and double-quote)
-that were present in the original word shall be removed unless they have themselves been quoted.
+that were present in the original word shall be removed 
+unless they have themselves been quoted.
 
 In minishell, single-quote and double-quote should be handled.
 */
 
-void execute_quote_removal(t_cmd_node *cur_cmd)
+void	execute_quote_removal(t_cmd_node *cur_cmd)
 {
-	char *tmp;
+	char	*tmp;
 
 	while (cur_cmd)
 	{
@@ -26,9 +39,9 @@ void execute_quote_removal(t_cmd_node *cur_cmd)
 	}
 }
 
-void remove_quote(t_node *cur)
+void	remove_quote(t_node *cur)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (cur->left)
 		remove_quote(cur->left);
