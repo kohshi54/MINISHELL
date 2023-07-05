@@ -1,0 +1,49 @@
+#ifndef EXPANDER_H
+# define EXPANDER_H
+
+# include "../libft/libft.h"
+# include "../lexer/lexer.h"
+# include "../parser/parser.h"
+# include "../minishell.h"
+
+/* expander_params.c */
+typedef struct s_word
+{
+	char *str;
+	bool in_single_quote;
+	struct s_word *next;
+} t_word;
+
+char *replace_params_to_value(char *line);
+char *convert_list_to_line(t_word *cur);
+void expand_params(t_node *cur);
+t_node *expand(t_node *root);
+#define SINGLE_QUOTE '\''
+#define DOUBLE_QUOTE '"'
+
+/* expander_params_utils.c */
+// t_word *new_sec(t_word *prev, char *str, size_t num);
+// t_word *new_sec(t_word *prev, char *str, size_t num, int single_quote_flg);
+t_word *append_new(t_word *prev, char *str, size_t num, int single_quote_flg);
+void print_sec(t_word *head);
+char *ft_strjoin_null_accept(char *s1, char *s2);
+
+/* expander_split.c */
+void split_field(t_node *cur);
+
+/* expander_split_utils.c */
+void split_node_when_presence_of_ifs(t_cmd_node *cur, char *ifs);
+
+/* expander_removal.c */
+typedef struct s_word2
+{
+	char *str;
+	struct s_word2 *next;
+} t_word2;
+
+void remove_quote(t_node *cur);
+
+/* expander_removal_utils.c */
+char *removal(char *line);
+
+#endif
