@@ -68,6 +68,14 @@ int pipex(t_simplecmd **cur)
 	i = 0;
 	cmdnum = get_node_count(cur);
 	ft_printf("cmdnum: %d\n", cmdnum);
+	if (cmdnum < 2)
+	{
+		pid = fork();
+		if (pid == 0)
+			execute_command(cur[0]);
+		wait(&status);
+		return (0);
+	}
 	while (i < cmdnum)
 	{
 		if (i != cmdnum - 1)

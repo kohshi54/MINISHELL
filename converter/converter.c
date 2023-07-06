@@ -95,20 +95,24 @@ void make_double_array(t_node *cur, t_simplecmd **cmds, size_t *i)
 
 void print_converted(t_simplecmd **cur)
 {
-	size_t	i;
+	size_t		i;
+	t_cmd		*cur_cmd;
+	t_redirect	*cur_redirect;
 
 	i = 0;
 	while (cur[i])
 	{
-		while (cur[i]->cmd)
+		cur_cmd = cur[i]->cmd;
+		while (cur_cmd)
 		{
-			ft_printf("cmd: %s\n", cur[i]->cmd->str);
-			cur[i]->cmd = cur[i]->cmd->next;
+			ft_printf("cmd: %s\n", cur_cmd->str);
+			cur_cmd = cur_cmd->next;
 		}
-		while (cur[i]->redirect)
+		cur_redirect = cur[i]->redirect;
+		while (cur_redirect)
 		{
-			ft_printf("redirect: %s\n", cur[i]->redirect->fname);
-			cur[i]->redirect = cur[i]->redirect->next;
+			ft_printf("redirect: %s\n", cur_redirect->fname);
+			cur_redirect = cur_redirect->next;
 		}
 		printf("==\n");
 		i++;
@@ -126,6 +130,8 @@ t_simplecmd **converter(t_node *cur)
 	i = 0;
 	make_double_array(cur, cmds, &i);
 	cmds[i] = NULL;
-	// print_converted(cmds);
+	printf("====\n");
+	print_converted(cmds);
+	printf("====\n");
 	return (cmds);
 }

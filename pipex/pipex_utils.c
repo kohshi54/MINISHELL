@@ -37,20 +37,6 @@ char *get_command_path(char *command)
 	}
 	return ("not found");
 }
-#include <fcntl.h>
-#include <string.h>
-bool detect_redirect(char **cmd)
-{
-	while (cmd && *cmd)
-	{
-		if (strncmp(*cmd, "<", 1) == 0)
-		{
-			return (true);
-		}
-		cmd++;
-	}
-	return (false);
-}
 
 size_t count_node(t_simplecmd *cur)
 {
@@ -91,19 +77,18 @@ void execute_command(t_simplecmd *cur)
 	char **cmd;
 	char *path;
 	extern char **environ;
+	int	fd;
 
-	// printf("%d\n", cur->kind);
-	// cmd = ft_split(cur->str, ' ');
-	cmd = make_cmd_array(cur);
 	if (cur->redirect)
 	{
 		if (cur->redirect->type == R_INPUT)
 		{
-			int fd = open("./ttt", O_RDONLY);
+			fd = open(cur->redirect->fname, O_RDONLY);
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}
 	}
+	cmd = make_cmd_array(cur);
 	path = get_command_path(cmd[0]);
 	execve(path, cmd, environ);
 }
