@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander_params_utils.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/06 14:52:08 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/06 14:55:40 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "expander.h"
 
-t_word *append_new(t_word *prev, char *str, size_t num, int quote_flg)
+t_word	*append_new(t_word *prev, char *str, size_t num, int quote_flg)
 {
-	t_word *cur;
+	t_word	*cur;
 
 	cur = ft_calloc(1, sizeof(t_word));
 	cur->str = ft_strndup(str, num);
@@ -15,11 +27,11 @@ t_word *append_new(t_word *prev, char *str, size_t num, int quote_flg)
 	return (cur);
 }
 
-char *ft_strjoin_null_accept(char *s1, char *s2)
+char	*ft_strjoin_null_accept(char *s1, char *s2)
 {
-	size_t len1;
-	size_t len2;
-	char *ptr;
+	size_t	len1;
+	size_t	len2;
+	char	*ptr;
 
 	if (!s2)
 		return (NULL);

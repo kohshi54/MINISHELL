@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:26:34 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 21:27:17 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:58:00 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,8 @@ char	*sweep_line(char *line)
 			line++;
 			break ;
 		}
-		else if (quote_flg == DOUBLE && *line == DOUBLE_QUOTE)
-		{
-			line++;
-			break ;
-		}
-		else if (quote_flg == NONE)
+		else if ((quote_flg == DOUBLE && *line == DOUBLE_QUOTE) \
+				|| quote_flg == NONE)
 		{
 			line++;
 			break ;

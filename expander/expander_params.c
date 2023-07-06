@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:15:29 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 21:19:08 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:55:29 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	execute_parameter_expansion(t_cmd_node *cur_cmd)
 
 	while (cur_cmd)
 	{
-		if (cur_cmd->kind == ND_REDIRECTION && ft_strncmp(cur_cmd->str, "<<", 2) == 0)
+		if (cur_cmd->kind == ND_REDIRECTION && \
+			ft_strncmp(cur_cmd->str, "<<", 2) == 0)
 		{
 			if (cur_cmd->next)
 			{

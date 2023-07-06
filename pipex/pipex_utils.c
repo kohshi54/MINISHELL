@@ -46,6 +46,7 @@ void execute_command(char *cmdline, t_varlist *varlist)
 
 	(void)varlist;
 	cmd = ft_split(cmdline, ' ');
+	/* ここでヒアドク、リダイレクトを検知して、fd繋ぎ換えを行う */
 	if (!cmd)
 	{
 		ft_printf("error");
