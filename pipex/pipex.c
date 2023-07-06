@@ -1,98 +1,73 @@
 #include "pipex.h"
 
-void execute_first(char *cmd, int new_pipe[2], t_varlist *varlist)
+void	execute_first(t_simplecmd *cur, int new_pipe[2])
 {
-	//	extern char **environ;
+	extern char **environ;
 
 	close(new_pipe[READ]);
 	dup2(new_pipe[WRITE], STDOUT_FILENO);
 	close(new_pipe[WRITE]);
-	execute_command(cmd, varlist);
+	execute_command(cur);
 }
 
-void execute_last(char *cmd, int old_read_end, t_varlist *varlist)
+void	execute_last(t_simplecmd *cur, int old_read_end)
 {
-	//	extern char **environ;
+	extern char **environ;
 
 	dup2(old_read_end, STDIN_FILENO);
 	close(old_read_end);
-	execute_command(cmd, varlist);
+	execute_command(cur);
 }
 
-void execute_middle(char *cmd, int new_pipe[2], int old_read_end, t_varlist *varlist)
+void	execute_middle(t_simplecmd *cur, int new_pipe[2], int old_read_end)
 {
-	//	extern char **environ;
+	extern char **environ;
 
 	close(new_pipe[READ]);
 	dup2(old_read_end, STDIN_FILENO);
 	close(old_read_end);
 	dup2(new_pipe[WRITE], STDOUT_FILENO);
 	close(new_pipe[WRITE]);
-	execute_command(cmd, varlist);
+	execute_command(cur);
 }
 
-void validate_input(int argc)
-{
-	if (argc < 3)
-	{
-		ft_printf("too few arguments\n");
-		exit(0);
-	}
-}
-
-size_t count_argv(char **argv)
+size_t get_node_count(t_simplecmd **cur)
 {
 	size_t i;
 
 	i = 0;
-	while (argv[i])
+	while (*cur)
+	{
+		cur++;
 		i++;
+	}
 	return (i);
 }
 
-void print_argv(char *argv[])
+void execute_exit(t_simplecmd **cur)
 {
-	while (*argv)
+	while (*cur)
 	{
-		ft_printf("argv: %s\n", (*argv));
-		argv++;
-	}
-}
-
-void execute_exit(char *argv[])
-{
-	while (*argv)
-	{
-		if (ft_strncmp(*argv, "exit", 4) == 0)
+		printf("cur->str; %s\n", (*cur)->cmd->str);
+		if (ft_strncmp((*cur)->cmd->str, "exit", 4) == 0)
 			exit(0);
-		argv++;
+		cur++;
 	}
 }
 
-// int pipex(int argc, char *argv[])
-int pipex(char *argv[], t_varlist *varlist)
+int pipex(t_simplecmd **cur)
 {
 	int new_pipe[2];
 	pid_t pid;
-	//	extern char **environ;
 	int status;
 	size_t cmdnum;
 	int old_read_end;
-	size_t i;
+	size_t	i;
 
-	// validate_input(argc);
-	print_argv(argv);
-	execute_exit(argv);
-	cmdnum = count_argv(argv);
-	if (cmdnum < 2)
-	{
-		pid = fork();
-		if (pid == 0)
-			execute_command(argv[0], varlist);
-		wait(&status);
-		return (0);
-	}
+	execute_exit(cur);
 	i = 0;
+	cmdnum = get_node_count(cur);
+	ft_printf("cmdnum: %d\n", cmdnum);
 	while (i < cmdnum)
 	{
 		if (i != cmdnum - 1)
@@ -101,11 +76,11 @@ int pipex(char *argv[], t_varlist *varlist)
 		if (pid == 0)
 		{
 			if (i == 0)
-				execute_first(argv[i], new_pipe, varlist);
+				execute_first(cur[i], new_pipe);
 			else if (i == cmdnum - 1)
-				execute_last(argv[i], old_read_end, varlist);
+				execute_last(cur[i], old_read_end);
 			else
-				execute_middle(argv[i], new_pipe, old_read_end, varlist);
+				execute_middle(cur[i], new_pipe, old_read_end);
 		}
 		if (i != 0)
 			close(old_read_end);

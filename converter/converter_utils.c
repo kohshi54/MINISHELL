@@ -49,21 +49,21 @@ bool heredoc_exist(t_cmd_node *cmd)
 	return (false);
 }
 
-void count_node(t_node *cur, size_t *count)
+void count_node2(t_node *cur, size_t *count)
 {
 	if (cur->left)
-		count_node(cur->left, count);
+		count_node2(cur->left, count);
 	if (cur->kind != ND_PIPE)
 		(*count)++;
 	if (cur->right)
-		count_node(cur->right, count);
+		count_node2(cur->right, count);
 }
 
-size_t get_node_count(t_node *cur)
+size_t get_node_count2(t_node *cur)
 {
 	size_t count;
 
 	count = 0;
-	count_node(cur, &count);
+	count_node2(cur, &count);
 	return (count);
 }

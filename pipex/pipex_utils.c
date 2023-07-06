@@ -37,22 +37,73 @@ char *get_command_path(char *command)
 	}
 	return ("not found");
 }
+#include <fcntl.h>
+#include <string.h>
+bool detect_redirect(char **cmd)
+{
+	while (cmd && *cmd)
+	{
+		if (strncmp(*cmd, "<", 1) == 0)
+		{
+			return (true);
+		}
+		cmd++;
+	}
+	return (false);
+}
 
-void execute_command(char *cmdline, t_varlist *varlist)
+size_t count_node(t_simplecmd *cur)
+{
+	size_t	i;
+	t_cmd	*tmp;
+
+	i = 0;
+	tmp = cur->cmd;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+char **make_cmd_array(t_simplecmd *cur)
+{
+	char	**cmd;
+	size_t	num;
+	char	**head;
+
+	num = count_node(cur);
+	cmd = malloc(sizeof(char *) * (num + 1));
+	head = cmd;
+	while (cur->cmd)
+	{
+		*cmd = cur->cmd->str;
+		cur->cmd = cur->cmd->next;
+		cmd++;
+	}
+	*cmd = NULL;
+	return (head);
+}
+
+void execute_command(t_simplecmd *cur)
 {
 	char **cmd;
 	char *path;
 	extern char **environ;
 
-	(void)varlist;
-	cmd = ft_split(cmdline, ' ');
-	/* ここでヒアドク、リダイレクトを検知して、fd繋ぎ換えを行う */
-	if (!cmd)
+	// printf("%d\n", cur->kind);
+	// cmd = ft_split(cur->str, ' ');
+	cmd = make_cmd_array(cur);
+	if (cur->redirect)
 	{
-		ft_printf("error");
-		return;
+		if (cur->redirect->type == R_INPUT)
+		{
+			int fd = open("./ttt", O_RDONLY);
+			dup2(fd, STDIN_FILENO);
+			close(fd);
+		}
 	}
-	// exec_cmd(cmdline, cmd, varlist);
 	path = get_command_path(cmd[0]);
 	execve(path, cmd, environ);
 }

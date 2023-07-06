@@ -121,7 +121,7 @@ t_simplecmd **converter(t_node *cur)
 	t_simplecmd **cmds;
 	size_t		i;
 
-	count = get_node_count(cur);
+	count = get_node_count2(cur);
 	cmds = malloc(sizeof(t_simplecmd *) * (count + 1));
 	i = 0;
 	make_double_array(cur, cmds, &i);

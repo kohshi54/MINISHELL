@@ -38,11 +38,11 @@ void print_tree(t_node *cur)
 
 int main(void)
 {
-	char *line;
-	t_token *token_list;
-	t_node *root;
-	char **strs;
-	t_varlist varlist;
+	char		*line;
+	t_token		*token_list;
+	t_node		*root;
+	t_simplecmd	**cmds;
+	// t_varlist	varlist;
 
 	line = wrap_readline(NULL);
 	// printf("%s\n", line);
@@ -55,7 +55,8 @@ int main(void)
 		return (0);
 	print_tree(root);
 	root = expand(root);
-	strs = converter(root);
-	pipex(strs, &varlist);
+	cmds = converter(root);
+	// pipex(cmds, &varlist);
+	pipex(cmds);
 	return (0);
 }
