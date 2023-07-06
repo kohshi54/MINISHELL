@@ -10,14 +10,14 @@ after: cat << eof | echo hoge fuga
 
 int get_redirect_type(char *cmd)
 {
-	if (ft_strncmp(cmd, "<", 1) == 0)
-		return (R_INPUT);
-	if (ft_strncmp(cmd, ">", 1) == 0)
-		return (R_OUTPUT);
 	if (ft_strncmp(cmd, ">>", 2) == 0)
 		return (R_APND_OUTPUT);
 	if (ft_strncmp(cmd, "<<", 2) == 0)
 		return (R_HEREDOC);
+	if (ft_strncmp(cmd, "<", 1) == 0)
+		return (R_INPUT);
+	if (ft_strncmp(cmd, ">", 1) == 0)
+		return (R_OUTPUT);
 	return (0);
 }
 
@@ -111,7 +111,7 @@ void print_converted(t_simplecmd **cur)
 		cur_redirect = cur[i]->redirect;
 		while (cur_redirect)
 		{
-			ft_printf("redirect: %s\n", cur_redirect->fname);
+			ft_printf("redirect: %s, type: %d\n", cur_redirect->fname, cur_redirect->type);
 			cur_redirect = cur_redirect->next;
 		}
 		printf("==\n");

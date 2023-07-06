@@ -78,15 +78,30 @@ void execute_command(t_simplecmd *cur)
 	char *path;
 	extern char **environ;
 	int	fd;
+	t_redirect	*cur_red;
 
-	if (cur->redirect)
+	cur_red = cur->redirect;
+	while (cur_red)
 	{
-		if (cur->redirect->type == R_INPUT)
+		if (cur_red->type == R_INPUT)
 		{
-			fd = open(cur->redirect->fname, O_RDONLY);
+			fd = open(cur_red->fname, O_RDONLY);
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}
+		if (cur_red->type == R_OUTPUT)
+		{
+			fd = open(cur_red->fname, (O_RDWR | O_CREAT | O_TRUNC), 0664);
+			dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
+		if (cur_red->type == R_APND_OUTPUT)
+		{
+			fd = open(cur_red->fname, (O_RDWR | O_APPEND | O_CREAT), 0644);
+			dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
+		cur_red = cur_red->next;
 	}
 	cmd = make_cmd_array(cur);
 	path = get_command_path(cmd[0]);

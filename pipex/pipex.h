@@ -5,6 +5,7 @@
 # include "../libft/ft_printf.h"
 # include "../converter/converter.h"
 # include "../minishell.h"
+# include <fcntl.h>
 
 typedef struct s_varlist
 {

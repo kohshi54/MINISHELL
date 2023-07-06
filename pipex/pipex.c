@@ -46,7 +46,7 @@ size_t get_node_count(t_simplecmd **cur)
 
 void execute_exit(t_simplecmd **cur)
 {
-	while (*cur)
+	while (*cur && (*cur)->cmd)
 	{
 		printf("cur->str; %s\n", (*cur)->cmd->str);
 		if (ft_strncmp((*cur)->cmd->str, "exit", 4) == 0)
