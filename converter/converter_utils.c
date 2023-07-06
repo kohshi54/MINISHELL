@@ -51,23 +51,10 @@ bool heredoc_exist(t_cmd_node *cmd)
 
 void count_node(t_node *cur, size_t *count)
 {
-	t_cmd_node *tmp;
-
 	if (cur->left)
 		count_node(cur->left, count);
 	if (cur->kind != ND_PIPE)
-	{
 		(*count)++;
-		tmp = cur->cmd;
-		while (tmp)
-		{
-			if (tmp->kind == ND_REDIRECTION && ft_strncmp(tmp->str, "<<", 2) == 0)
-			{
-				(*count)++;
-			}
-			tmp = tmp->next;
-		}
-	}
 	if (cur->right)
 		count_node(cur->right, count);
 }

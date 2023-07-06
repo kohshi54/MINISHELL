@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 19:54:24 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 21:09:29 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:04:37 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../lexer/lexer.h"
 
-/* parser.c */
 typedef enum e_node_kind
 {
 	ND_CMD,
