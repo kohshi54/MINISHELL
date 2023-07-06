@@ -101,6 +101,10 @@ void execute_command(t_simplecmd *cur)
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
 		}
+		if (cur_red->type == R_HEREDOC)
+		{
+			/* heredoc */
+		}
 		cur_red = cur_red->next;
 	}
 	cmd = make_cmd_array(cur);
