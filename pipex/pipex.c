@@ -53,7 +53,7 @@ size_t get_node_count(t_simplecmd **cur)
 	i = 0;
 	while (*cur)
 	{
-		printf("cmdname: %s, fname: %s, type: %d\n", (*cur)->cmd->str, (*cur)->redirect ? (*cur)->redirect->fname : NULL, (*cur)->redirect ? (*cur)->redirect->type : 0);
+		ft_printf("cmdname: %s, fname: %s, type: %d\n", (*cur)->cmd->str, (*cur)->redirect ? (*cur)->redirect->fname : NULL, (*cur)->redirect ? (*cur)->redirect->type : 0);
 		cur++;
 		i++;
 	}
@@ -64,72 +64,64 @@ void execute_exit(t_simplecmd **cur)
 {
 	while (*cur && (*cur)->cmd)
 	{
-		printf("cur->str; %s\n", (*cur)->cmd->str);
+		ft_printf("cur->str; %s\n", (*cur)->cmd->str);
 		if (ft_strncmp((*cur)->cmd->str, "exit", 4) == 0)
 			exit(0);
 		cur++;
 	}
 }
 
-int pipex(t_simplecmd **cur)
+void	handle_heredoc(t_simplecmd *cmd, int here_pipe[2])
 {
-	int new_pipe[2];
-	pid_t pid;
-	int status;
-	size_t cmdnum;
-	int old_read_end;
+	t_redirect	*cur_red;
+
+	cur_red = cmd->redirect;
+	while (cur_red)
+	{
+		if (cur_red->type == R_HEREDOC)
+		{
+			pipe(here_pipe);
+			ft_heredoc(cmd->redirect->fname, here_pipe[WRITE]);
+			close(here_pipe[WRITE]);
+		}
+		cur_red = cur_red->next;
+	}
+}
+
+void	execute_one_simplecmd(t_simplecmd *cur)
+{
+	t_redirect	*cur_red;
+	int			here_pipe[2];
+	int			status;
+
+	handle_heredoc(cur, here_pipe);
+	if (fork() == 0)
+	{
+		if (here_pipe[READ] != 0)
+		{
+			dup2(here_pipe[READ], STDIN_FILENO);
+			close(here_pipe[READ]);
+		}
+		execute_command(cur);
+	}
+	close(here_pipe[READ]);
+	wait(&status);
+}
+
+void	execute_multiple_simplecmd(t_simplecmd **cur, size_t cmdnum)
+{
+	int		new_pipe[2];
 	size_t	i;
 	int here_pipe[2];
-	t_redirect *cur_red;
+	int old_read_end;
 
-	execute_exit(cur);
 	i = 0;
-	cmdnum = get_node_count(cur);
-	ft_printf("cmdnum: %d\n", cmdnum);
-	if (cmdnum < 2)
-	{
-		cur_red = cur[i]->redirect;
-		while (cur_red)
-		{
-			if (cur_red->type == R_HEREDOC)
-			{
-				pipe(here_pipe);
-				ft_heredoc(cur[i]->redirect->fname, here_pipe[WRITE]);
-				close(here_pipe[WRITE]);
-			}
-			cur_red = cur_red->next;
-		}
-		pid = fork();
-		if (pid == 0)
-		{
-			if (here_pipe[READ] != 0)
-			{
-				dup2(here_pipe[READ], STDIN_FILENO);
-				close(here_pipe[READ]);
-			}
-			execute_command(cur[0]);
-		}
-		close(here_pipe[READ]);
-		wait(&status);
-		return (0);
-	}
 	while (i < cmdnum)
 	{
 		if (i != cmdnum - 1)
 			pipe(new_pipe);
-		cur_red = cur[i]->redirect;
-		while (cur_red)
-		{
-			if (cur_red->type == R_HEREDOC)
-			{
-				pipe(here_pipe);
-				ft_heredoc(cur[i]->redirect->fname, here_pipe[WRITE]);
-				close(here_pipe[WRITE]);
-			}
-			cur_red = cur_red->next;
-		}
-		pid = fork();
-		if (pid == 0)
+		handle_heredoc(cur[i], here_pipe);
+		if (fork() == 0)
 		{
 			if (i == 0)
 				execute_first(cur[i], new_pipe, here_pipe[READ]);
@@ -142,15 +134,31 @@ int pipex(t_simplecmd **cur)
 			close(old_read_end);
 		old_read_end = new_pipe[READ];
 		close(new_pipe[WRITE]);
-		close(here_pipe[READ]);
+		if (here_pipe[READ] != 0)
+			close(here_pipe[READ]);
 		// waitpid(pid, &status, 0);
 		i++;
 	}
+}
+
+int pipex(t_simplecmd **cur)
+{
+	int status;
+	size_t cmdnum;
+
+	execute_exit(cur);
+	cmdnum = get_node_count(cur);
+	ft_printf("cmdnum: %d\n", cmdnum);
+	if (cmdnum < 2)
+	{
+		execute_one_simplecmd(cur[0]);
+		return (0);
+	}
+	execute_multiple_simplecmd(cur, cmdnum);
 	while (cmdnum-- > 0)
 	{
 		wait(&status);
 		// waitpid(pid, &status, 0);
 	}
-	// ft_printf("success\n");
 	return (0);
 }

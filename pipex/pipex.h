@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 21:04:14 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/07 21:06:23 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -9,23 +21,22 @@
 
 typedef struct s_varlist
 {
-	t_list *envvars;
-	t_list *vars;
-} t_varlist;
+	t_list	*envvars;
+	t_list	*vars;
+}	t_varlist;
+
+# define READ 0
+# define WRITE 1
 
 /* pipex.c */
-// int pipex(char *argv[], t_varlist *varlist);
-int pipex(t_simplecmd **cmds);
-// int pipex(char *argv[]);
-#define READ 0
-#define WRITE 1
+int		pipex(t_simplecmd **cmds);
 
-char *get_path_from_env();
-char *get_command_path(char *command);
-// void execute_command(char *cmdline, t_varlist *varlist);
-void execute_command(t_simplecmd *cmd);
+/* pipex_utils.c */
+char	*get_path_from_env(void);
+char	*get_command_path(char *command);
+void	execute_command(t_simplecmd *cmd);
 
 /* heredoc.c */
-int ft_heredoc(char *limiter, int writefd);
+int		ft_heredoc(char *limiter, int writefd);
 
 #endif
