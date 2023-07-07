@@ -8,9 +8,9 @@ OBJS_BONUS = $(SRCS_BONUS:%.c=%.o)
 INCLUDES = libft.h ft_printf.h
 
 TOTAL = $(OBJS)
-ifdef BNS
+# ifdef BNS
 TOTAL += $(OBJS_BONUS)
-endif
+# endif
 
 all :	$(NAME)
 

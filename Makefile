@@ -21,7 +21,8 @@ SRCS = 	main.c \
 		converter/converter.c \
 		converter/converter_utils.c \
 		pipex/pipex.c \
-		pipex/pipex_utils.c
+		pipex/pipex_utils.c \
+		pipex/heredoc.c
 
 OBJS = $(SRCS:%.c=%.o)
 

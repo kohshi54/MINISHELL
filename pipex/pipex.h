@@ -24,5 +24,6 @@ char *get_path_from_env();
 char *get_command_path(char *command);
 // void execute_command(char *cmdline, t_varlist *varlist);
 void execute_command(t_simplecmd *cmd);
+int ft_heredoc(char *limiter, int writefd);
 
 #endif

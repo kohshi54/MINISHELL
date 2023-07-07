@@ -1,25 +1,35 @@
 #include "pipex.h"
 
-void	execute_first(t_simplecmd *cur, int new_pipe[2])
+void	execute_first(t_simplecmd *cur, int new_pipe[2], int here_read)
 {
 	extern char **environ;
 
 	close(new_pipe[READ]);
 	dup2(new_pipe[WRITE], STDOUT_FILENO);
 	close(new_pipe[WRITE]);
+	if (here_read != 0)
+	{
+		dup2(here_read, STDIN_FILENO);
+		close(here_read);
+	}
 	execute_command(cur);
 }
 
-void	execute_last(t_simplecmd *cur, int old_read_end)
+void	execute_last(t_simplecmd *cur, int old_read_end, int here_read)
 {
 	extern char **environ;
 
 	dup2(old_read_end, STDIN_FILENO);
 	close(old_read_end);
+	if (here_read != 0)
+	{
+		dup2(here_read, STDIN_FILENO);
+		close(here_read);
+	}
 	execute_command(cur);
 }
 
-void	execute_middle(t_simplecmd *cur, int new_pipe[2], int old_read_end)
+void	execute_middle(t_simplecmd *cur, int new_pipe[2], int old_read_end, int here_read)
 {
 	extern char **environ;
 
@@ -28,6 +38,11 @@ void	execute_middle(t_simplecmd *cur, int new_pipe[2], int old_read_end)
 	close(old_read_end);
 	dup2(new_pipe[WRITE], STDOUT_FILENO);
 	close(new_pipe[WRITE]);
+	if (here_read != 0)
+	{
+		dup2(here_read, STDIN_FILENO);
+		close(here_read);
+	}
 	execute_command(cur);
 }
 
@@ -38,6 +53,7 @@ size_t get_node_count(t_simplecmd **cur)
 	i = 0;
 	while (*cur)
 	{
+		printf("cmdname: %s, fname: %s, type: %d\n", (*cur)->cmd->str, (*cur)->redirect ? (*cur)->redirect->fname : NULL, (*cur)->redirect ? (*cur)->redirect->type : 0);
 		cur++;
 		i++;
 	}
@@ -63,6 +79,8 @@ int pipex(t_simplecmd **cur)
 	size_t cmdnum;
 	int old_read_end;
 	size_t	i;
+	int here_pipe[2];
+	t_redirect *cur_red;
 
 	execute_exit(cur);
 	i = 0;
@@ -70,9 +88,28 @@ int pipex(t_simplecmd **cur)
 	ft_printf("cmdnum: %d\n", cmdnum);
 	if (cmdnum < 2)
 	{
+		cur_red = cur[i]->redirect;
+		while (cur_red)
+		{
+			if (cur_red->type == R_HEREDOC)
+			{
+				pipe(here_pipe);
+				ft_heredoc(cur[i]->redirect->fname, here_pipe[WRITE]);
+				close(here_pipe[WRITE]);
+			}
+			cur_red = cur_red->next;
+		}
 		pid = fork();
 		if (pid == 0)
+		{
+			if (here_pipe[READ] != 0)
+			{
+				dup2(here_pipe[READ], STDIN_FILENO);
+				close(here_pipe[READ]);
+			}
 			execute_command(cur[0]);
+		}
+		close(here_pipe[READ]);
 		wait(&status);
 		return (0);
 	}
@@ -80,20 +117,32 @@ int pipex(t_simplecmd **cur)
 	{
 		if (i != cmdnum - 1)
 			pipe(new_pipe);
+		cur_red = cur[i]->redirect;
+		while (cur_red)
+		{
+			if (cur_red->type == R_HEREDOC)
+			{
+				pipe(here_pipe);
+				ft_heredoc(cur[i]->redirect->fname, here_pipe[WRITE]);
+				close(here_pipe[WRITE]);
+			}
+			cur_red = cur_red->next;
+		}
 		pid = fork();
 		if (pid == 0)
 		{
 			if (i == 0)
-				execute_first(cur[i], new_pipe);
+				execute_first(cur[i], new_pipe, here_pipe[READ]);
 			else if (i == cmdnum - 1)
-				execute_last(cur[i], old_read_end);
+				execute_last(cur[i], old_read_end, here_pipe[READ]);
 			else
-				execute_middle(cur[i], new_pipe, old_read_end);
+				execute_middle(cur[i], new_pipe, old_read_end, here_pipe[READ]);
 		}
 		if (i != 0)
 			close(old_read_end);
 		old_read_end = new_pipe[READ];
 		close(new_pipe[WRITE]);
+		close(here_pipe[READ]);
 		// waitpid(pid, &status, 0);
 		i++;
 	}
