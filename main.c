@@ -43,6 +43,7 @@ int main(void)
 	t_simplecmd	**cmds;
 	// t_varlist	varlist;
 
+	ptr_list = NULL;
 	line = wrap_readline(NULL);
 	// printf("%s\n", line);
 	token_list = tokenize(line);

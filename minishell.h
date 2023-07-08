@@ -3,6 +3,8 @@
 
 # include "gc.h"
 
+t_list		*ptr_list;
+
 typedef struct s_simplecmd
 {
 	struct s_redirect	*redirect;
