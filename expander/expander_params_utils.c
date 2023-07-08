@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander_params_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:52:08 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/06 14:55:40 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:30:23 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-t_word	*append_new(t_word *prev, char *str, size_t num, int quote_flg)
+t_word	*append_new(t_word *prev, char *str, size_t num, int quote_flg, t_word **head)
 {
 	t_word	*cur;
 
@@ -23,7 +23,10 @@ t_word	*append_new(t_word *prev, char *str, size_t num, int quote_flg)
 		cur->in_single_quote = quote_flg;
 	else
 		cur->in_single_quote = 0;
-	prev->next = cur;
+	if (prev)
+		prev->next = cur;
+	else
+		(*head) = cur;
 	return (cur);
 }
 
@@ -67,6 +70,7 @@ void	update_quote_flg(int *quote_flg, char c)
 char	*make_word(t_word *cur)
 {
 	char	*line;
+	char 	*tmp;
 
 	line = NULL;
 	while (cur)
@@ -76,7 +80,12 @@ char	*make_word(t_word *cur)
 			cur->str = ft_getenviron(&(cur->str[1]));
 		ft_printf("exp: %s\n", cur->str);
 		if (cur->str)
+		{
+			tmp = line;
 			line = ft_strjoin_null_accept(line, cur->str);
+			free(tmp);
+			free(cur->str);
+		}
 		cur = cur->next;
 	}
 	return (line);

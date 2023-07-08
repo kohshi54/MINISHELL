@@ -35,7 +35,6 @@ void print_tree(t_node *cur)
 		print_tree(cur->right);
 }
 
-
 int main(void)
 {
 	char		*line;

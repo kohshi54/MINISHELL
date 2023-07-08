@@ -1,6 +1,7 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror 
+# -g -fsanitize=address
 
 SRCS = 	main.c \
 		ft_readline.c \

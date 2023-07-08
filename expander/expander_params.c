@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:15:29 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/06 14:55:29 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 16:33:42 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	scan_line(char **line, int *quote_flg)
 
 char	*find_params_and_replace(char *line)
 {
-	t_word	head;
+	t_word	*head;
 	char	*start;
 	t_word	*cur;
 	int		quote_flg;
 
-	cur = &head;
+	cur = NULL;
 	quote_flg = NONE;
 	while (*line)
 	{
@@ -60,9 +60,9 @@ char	*find_params_and_replace(char *line)
 			scan_param(&line, &quote_flg);
 		else
 			scan_line(&line, &quote_flg);
-		cur = append_new(cur, start, line - start, quote_flg);
-	}
-	return (make_word(head.next));
+		cur = append_new(cur, start, line - start, quote_flg, &head);
+	} 
+	return (make_word(head));
 }
 
 void	execute_parameter_expansion(t_cmd_node *cur_cmd)

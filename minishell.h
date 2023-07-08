@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "gc.h"
+
 typedef struct s_simplecmd
 {
 	struct s_redirect	*redirect;

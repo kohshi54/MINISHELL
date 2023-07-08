@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:12:41 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 21:20:59 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:27:29 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_node	*expand(t_node *root);
 # define DOUBLE_QUOTE '"'
 
 /* expander_params_utils.c */
-t_word	*append_new(t_word *prev, char *str, size_t num, int single_quote_flg);
+// t_word	*append_new(t_word *prev, char *str, size_t num, int single_quote_flg);
+t_word	*append_new(t_word *prev, char *str, size_t num, int quote_flg, t_word **head);
 char	*ft_strjoin_null_accept(char *s1, char *s2);
 bool	is_env_assignable(char c);
 void	update_quote_flg(int *quote_flg, char c);

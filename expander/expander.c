@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:53:50 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/06 14:54:57 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:28:39 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void print_tree2(t_node *cur)
 t_node	*expand(t_node *root)
 {
 	expand_params(root);
+	// system("leaks -q minishell");
 	split_field(root);
 	remove_quote(root);
 	return (root);
