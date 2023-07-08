@@ -59,5 +59,6 @@ int main(void)
 	// pipex(cmds, &varlist);
 	pipex(cmds);
 	free_all_mallocated_area(ptr_list);
+	system("leaks -q minishell");
 	return (0);
 }

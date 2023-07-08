@@ -8,7 +8,7 @@ char *get_path_from_env()
 	{
 		if (ft_strncmp(*environ, "PATH=", 5) == 0)
 		{
-			ft_strtrim(*environ, "PATH=");
+			ft_strtrim_gc(*environ, "PATH=", &ptr_list);
 			return (*environ);
 		}
 		environ++;
@@ -24,11 +24,11 @@ char *get_command_path(char *command)
 	extern char **environ;
 
 	path = get_path_from_env();
-	path_array = ft_split(path, ':');
-	command = ft_strjoin("/", command);
+	path_array = ft_split_gc(path, ':', &ptr_list);
+	command = ft_strjoin_gc("/", command, &ptr_list);
 	while (*path_array)
 	{
-		command_path = ft_strjoin(*path_array, command);
+		command_path = ft_strjoin_gc(*path_array, command, &ptr_list);
 		if (access(command_path, X_OK) == 0)
 		{
 			return (command_path);
@@ -60,7 +60,7 @@ char **make_cmd_array(t_simplecmd *cur)
 	char	**head;
 
 	num = count_node(cur);
-	cmd = malloc(sizeof(char *) * (num + 1));
+	cmd = ft_malloc(sizeof(char *) * (num + 1), &ptr_list);
 	head = cmd;
 	while (cur->cmd)
 	{
