@@ -2,6 +2,8 @@
 # define CONVERTER_H
 
 # include "../minishell.h"
+# include "../libft/libft.h"
+# include "../parser/parser.h"
 
 typedef enum e_redirect_type
 {

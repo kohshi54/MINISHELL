@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 19:09:43 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 19:19:44 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:42:02 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include "../libft/ft_printf.h"
 # include "../libft/libft.h"
+# include "../minishell.h"
 
 typedef enum e_token_kind
 {

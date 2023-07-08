@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:09 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 19:02:15 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:40:05 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,11 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+void	ft_free(void *ptr);
+void	*ft_malloc(size_t size, t_list **list);
+void	free_all_mallocated_area(t_list *list);
+
+char	*ft_strndup_gc(const char *s1, size_t n, t_list **list);
 
 #endif

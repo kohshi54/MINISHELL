@@ -54,6 +54,7 @@ int main(void)
 	if (root == NULL)
 		return (0);
 	print_tree(root);
+	free_all_mallocated_area(ptr_list);
 	root = expand(root);
 	cmds = converter(root);
 	// pipex(cmds, &varlist);
