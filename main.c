@@ -59,6 +59,11 @@ int main(void)
 	// pipex(cmds, &varlist);
 	pipex(cmds);
 	free_all_mallocated_area(ptr_list);
-	system("leaks -q minishell");
+	free(line);
 	return (0);
 }
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q minishell");
+// }

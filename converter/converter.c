@@ -126,7 +126,7 @@ t_simplecmd **converter(t_node *cur)
 	size_t		i;
 
 	count = get_node_count2(cur);
-	cmds = malloc(sizeof(t_simplecmd *) * (count + 1));
+	cmds = ft_malloc(sizeof(t_simplecmd *) * (count + 1), &ptr_list);
 	i = 0;
 	make_double_array(cur, cmds, &i);
 	cmds[i] = NULL;
