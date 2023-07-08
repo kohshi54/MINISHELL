@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 20:02:57 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 20:03:05 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:11:59 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_node	*init_new_node(void)
 {
 	t_node	*new;
 
-	new = malloc(sizeof(t_node));
+	new = ft_malloc(sizeof(t_node), &ptr_list);
 	new->str = NULL;
 	new->left = NULL;
 	new->right = NULL;
@@ -99,7 +99,7 @@ t_cmd_node	*create_cmd_list(t_token **token)
 			ft_printf("parse error: unexpected token in cmd\n");
 			return (NULL);
 		}
-		cur = malloc(sizeof(t_cmd_node));
+		cur = ft_malloc(sizeof(t_cmd_node), &ptr_list);
 		if (!head)
 			head = cur;
 		cur->kind = get_node_kind((*token)->kind);

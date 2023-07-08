@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_removal_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:26:34 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/06 14:58:00 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:19:12 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ char	*integrate_list_to_line(t_word2 *cur)
 		{
 			tmp = line;
 			line = ft_strjoin_null_accept(line, cur->str);
-			free(tmp);
-			free(cur->str);
+			// free(tmp);
+			// free(cur->str);
 		}
 		next = cur->next;
-		free(cur);
+		// free(cur);
 		cur = next;
 	}
 	return (line);
@@ -40,19 +40,19 @@ t_word2	*append_new_node(t_word2 *prev, char *str, size_t num)
 	t_word2	*cur;
 	char	*tmp;
 
-	cur = ft_calloc(1, sizeof(t_word2));
-	cur->str = ft_strndup(str, num);
+	cur = ft_malloc(sizeof(t_word2), &ptr_list);
+	cur->str = ft_strndup_gc(str, num, &ptr_list);
 	if (str[0] == SINGLE_QUOTE)
 	{
 		tmp = cur->str;
-		cur->str = ft_strtrim(cur->str, "\'");
-		free(tmp);
+		cur->str = ft_strtrim_gc(cur->str, "\'", &ptr_list);
+		// free(tmp);
 	}
 	else if (str[0] == DOUBLE_QUOTE)
 	{
 		tmp = cur->str;
-		cur->str = ft_strtrim(cur->str, "\"");
-		free(tmp);
+		cur->str = ft_strtrim_gc(cur->str, "\"", &ptr_list);
+		// free(tmp);
 	}
 	cur->next = NULL;
 	if (prev)

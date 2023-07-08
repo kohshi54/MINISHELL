@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_removal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:25:50 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/05 21:26:11 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:15:05 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	execute_quote_removal(t_cmd_node *cur_cmd)
 		{
 			tmp = cur_cmd->str;
 			cur_cmd->str = removal(cur_cmd->str);
-			free(tmp);
+			// free(tmp);
 		}
 		ft_printf("after: %s\n", cur_cmd->str);
 		cur_cmd = cur_cmd->next;
@@ -52,7 +52,7 @@ void	remove_quote(t_node *cur)
 		ft_printf("before: %s\n", cur->str);
 		tmp = cur->str;
 		cur->str = removal(cur->str);
-		free(tmp);
+		// free(tmp);
 		ft_printf("after: %s\n", cur->str);
 	}
 	if (cur->right)

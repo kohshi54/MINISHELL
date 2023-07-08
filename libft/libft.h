@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:09 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 17:40:05 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:18:14 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ void	*ft_malloc(size_t size, t_list **list);
 void	free_all_mallocated_area(t_list *list);
 
 char	*ft_strndup_gc(const char *s1, size_t n, t_list **list);
+char	*ft_strdup_gc(const char *s1, t_list **list);
+char	*ft_strtrim_gc(char const *s1, char const *set, t_list **list);
 
 #endif

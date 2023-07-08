@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:52:08 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 17:55:35 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:13:25 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_word	*append_new(t_word *prev, char *str, size_t num, int quote_flg, t_word **
 {
 	t_word	*cur;
 
-	cur = ft_calloc(1, sizeof(t_word));
-	cur->str = ft_strndup(str, num);
+	cur = ft_malloc(sizeof(t_word), &ptr_list);
+	cur->str = ft_strndup_gc(str, num, &ptr_list);
 	cur->next = NULL;
 	if (quote_flg == SINGLE)
 		cur->in_single_quote = quote_flg;
@@ -42,7 +42,7 @@ char	*ft_strjoin_null_accept(char *s1, char *s2)
 	if (s1)
 		len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	ptr = malloc(sizeof(char) * (len1 + len2 + 1));
+	ptr = ft_malloc(sizeof(char) * (len1 + len2 + 1), &ptr_list);
 	if (!ptr)
 		return (NULL);
 	ft_memcpy(ptr, s1, len1);
