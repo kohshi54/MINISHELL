@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:15:29 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 17:54:33 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:55:17 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	execute_parameter_expansion(t_cmd_node *cur_cmd)
 		}
 		tmp = cur_cmd->str;
 		cur_cmd->str = find_params_and_replace(cur_cmd->str);
-		free(tmp);
+		// free(tmp);
 		cur_cmd = cur_cmd->next;
 	}
 }

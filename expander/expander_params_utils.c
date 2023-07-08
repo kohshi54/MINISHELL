@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:52:08 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 15:30:23 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:55:35 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ char	*make_word(t_word *cur)
 		{
 			tmp = line;
 			line = ft_strjoin_null_accept(line, cur->str);
-			free(tmp);
-			free(cur->str);
+			// free(tmp);
+			// free(cur->str);
 		}
 		cur = cur->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:12:41 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 15:27:29 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:05:23 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@
 # include "../minishell.h"
 
 /* expander_params.c */
-typedef struct s_word
-{
-	char			*str;
-	bool			in_single_quote;
-	struct s_word	*next;
-}	t_word;
-
 char	*replace_params_to_value(char *line);
 char	*convert_list_to_line(t_word *cur);
 void	expand_params(t_node *cur);

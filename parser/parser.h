@@ -3,46 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 19:54:24 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/06 15:04:37 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:06:22 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "../lexer/lexer.h"
-
-typedef enum e_node_kind
-{
-	ND_CMD,
-	ND_PIPE,
-	ND_REDIRECTION,
-}	t_node_kind;
-
-typedef struct s_arg_node
-{
-	char				*str;
-	struct s_arg_node	*next;
-}	t_arg_node;
-
-typedef struct s_cmd_node
-{
-	t_node_kind			kind;
-	char				*str;
-	struct s_cmd_node	*next;
-}	t_cmd_node;
-
-typedef struct s_node
-{
-	t_node_kind		kind;
-	char			*str;
-	struct s_node	*left;
-	struct s_node	*right;
-	t_cmd_node		*cmd;
-}	t_node;
+# include "../minishell.h"
 
 extern char	**environ;
 
