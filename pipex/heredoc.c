@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 07:55:25 by tyonezaw          #+#    #+#             */
-/*   Updated: 2023/07/08 15:54:24 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:00:08 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int ft_heredoc(char *limiter, int writefd)
 		if (!line)
 			exit(0);
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-			break;
+		{
+			free(line);
+			break ;
+		}
 		if (!list)
 			list = ft_lstnew(line);
 		else
