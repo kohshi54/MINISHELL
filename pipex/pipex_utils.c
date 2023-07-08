@@ -86,6 +86,11 @@ void execute_command(t_simplecmd *cur)
 		if (cur_red->type == R_INPUT)
 		{
 			fd = open(cur_red->fname, O_RDONLY);
+			if (fd == -1)
+			{
+				ft_printf("no such file or directory\n");
+				return ;
+			}
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}

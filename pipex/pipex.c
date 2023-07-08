@@ -90,7 +90,6 @@ void	handle_heredoc(t_simplecmd *cmd, int here_pipe[2])
 
 void	execute_one_simplecmd(t_simplecmd *cur)
 {
-	t_redirect	*cur_red;
 	int			here_pipe[2];
 	int			status;
 
