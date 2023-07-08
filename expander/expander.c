@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:53:50 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 15:28:39 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:10:32 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,9 @@ Field splitting.
 Quote removal.
 */
 
-/*
-void print_tree2(t_node *cur)
-{
-	t_cmd_node *tmp;
-
-	if (cur->left)
-		print_tree2(cur->left);
-	if (cur->kind != ND_PIPE)
-	{
-		tmp = cur->cmd;
-		while (tmp)
-		{
-			if (tmp->next)
-				printf("node: %s\n", tmp->str);
-			else
-				printf("node: %s", tmp->str);
-			tmp = tmp->next;
-		}
-	}
-	else
-	{
-		printf("node: %s", cur->str);
-	}
-	printf("\n");
-	if (cur->right)
-		print_tree2(cur->right);
-}
-*/
-
 t_node	*expand(t_node *root)
 {
 	expand_params(root);
-	// system("leaks -q minishell");
 	split_field(root);
 	remove_quote(root);
 	return (root);

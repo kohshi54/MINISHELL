@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   converter.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/08 19:15:26 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/08 19:16:18 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "converter.h"
 
 /*
@@ -8,7 +20,7 @@ before: echo hoge << eof fuga
 after: cat << eof | echo hoge fuga
 */
 
-int get_redirect_type(char *cmd)
+int	get_redirect_type(char *cmd)
 {
 	if (ft_strncmp(cmd, ">>", 2) == 0)
 		return (R_APND_OUTPUT);
@@ -21,9 +33,9 @@ int get_redirect_type(char *cmd)
 	return (0);
 }
 
-t_redirect *add_redirect(t_cmd_node *cur, t_redirect *prev, t_simplecmd *cmd)
+t_redirect	*add_redirect(t_cmd_node *cur, t_redirect *prev, t_simplecmd *cmd)
 {
-	t_redirect *new;
+	t_redirect	*new;
 
 	new = ft_malloc(sizeof(t_redirect), &ptr_list);
 	new->fname = cur->next->str;
@@ -60,7 +72,7 @@ t_simplecmd	*init_simplecmd(void)
 	return (new);
 }
 
-void make_double_array(t_node *cur, t_simplecmd **cmds, size_t *i)
+void	make_double_array(t_node *cur, t_simplecmd **cmds, size_t *i)
 {
 	t_cmd_node	*tmp;
 	t_redirect	*red_cur;
@@ -119,10 +131,10 @@ void print_converted(t_simplecmd **cur)
 	}
 }
 
-t_simplecmd **converter(t_node *cur)
+t_simplecmd	**converter(t_node *cur)
 {
 	size_t		count;
-	t_simplecmd **cmds;
+	t_simplecmd	**cmds;
 	size_t		i;
 
 	count = get_node_count2(cur);

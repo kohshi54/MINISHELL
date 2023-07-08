@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:25:01 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 18:14:44 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:12:42 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	split_node_when_presence_of_ifs(t_cmd_node *cur, char *ifs)
 		if (is_ifs(*line, ifs) == true && quote_flg == NONE)
 		{
 			split_node(cur, line, ifs);
-			// free(line);
 			break ;
 		}
 		line++;

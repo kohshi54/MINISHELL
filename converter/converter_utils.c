@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   converter_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/08 19:16:30 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/08 19:16:53 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "converter.h"
 
 char	*ft_strconnect(char *s1, char *s2, char *s3)
@@ -21,9 +33,9 @@ char	*ft_strconnect(char *s1, char *s2, char *s3)
 	return (ptr);
 }
 
-int get_list_size(t_cmd_node *lst)
+int	get_list_size(t_cmd_node *lst)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (lst)
@@ -34,7 +46,7 @@ int get_list_size(t_cmd_node *lst)
 	return ((int)i);
 }
 
-bool heredoc_exist(t_cmd_node *cmd)
+bool	heredoc_exist(t_cmd_node *cmd)
 {
 	while (cmd)
 	{
@@ -47,7 +59,7 @@ bool heredoc_exist(t_cmd_node *cmd)
 	return (false);
 }
 
-void count_node2(t_node *cur, size_t *count)
+void	count_node2(t_node *cur, size_t *count)
 {
 	if (cur->left)
 		count_node2(cur->left, count);
@@ -57,9 +69,9 @@ void count_node2(t_node *cur, size_t *count)
 		count_node2(cur->right, count);
 }
 
-size_t get_node_count2(t_node *cur)
+size_t	get_node_count2(t_node *cur)
 {
-	size_t count;
+	size_t	count;
 
 	count = 0;
 	count_node2(cur, &count);

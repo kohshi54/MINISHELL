@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   converter.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/08 19:13:52 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/07/08 19:14:43 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONVERTER_H
 # define CONVERTER_H
 
@@ -27,13 +39,13 @@ typedef struct s_cmd
 }	t_cmd;
 
 /* converter.c */
-t_simplecmd **converter(t_node *cur);
+t_simplecmd	**converter(t_node *cur);
 
 /* converter_utils.c */
-char	*ft_strconnect(char *s1, char *s2, char *s3);
-int		get_list_size(t_cmd_node *lst);
-bool	heredoc_exist(t_cmd_node *cmd);
-void	count_node2(t_node *cur, size_t *count);
-size_t	get_node_count2(t_node *cur);
+char		*ft_strconnect(char *s1, char *s2, char *s3);
+int			get_list_size(t_cmd_node *lst);
+bool		heredoc_exist(t_cmd_node *cmd);
+void		count_node2(t_node *cur, size_t *count);
+size_t		get_node_count2(t_node *cur);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:52:08 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 18:54:48 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:11:44 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	update_quote_flg(int *quote_flg, char c)
 char	*make_word(t_word *cur)
 {
 	char	*line;
-	char 	*tmp;
 
 	line = NULL;
 	while (cur)
@@ -80,12 +79,7 @@ char	*make_word(t_word *cur)
 			cur->str = ft_getenviron(&(cur->str[1]));
 		ft_printf("exp: %s\n", cur->str);
 		if (cur->str)
-		{
-			tmp = line;
 			line = ft_strjoin_null_accept(line, cur->str);
-			// free(tmp);
-			// free(cur->str);
-		}
 		cur = cur->next;
 	}
 	return (line);

@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 19:16:04 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 17:42:42 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/08 19:09:41 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ t_token	*new_token(t_token_kind kind, t_token *prev, char *str, size_t num)
 {
 	t_token	*cur;
 
-	// cur = ft_calloc(1, sizeof(t_token));
 	cur = ft_malloc(sizeof(t_token), &ptr_list);
 	cur->kind = kind;
-	// cur->str = ft_strndup(str, num);
 	cur->str = ft_strndup_gc(str, num, &ptr_list);
 	prev->next = cur;
 	return (cur);
