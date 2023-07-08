@@ -25,7 +25,7 @@ t_redirect *add_redirect(t_cmd_node *cur, t_redirect *prev, t_simplecmd *cmd)
 {
 	t_redirect *new;
 
-	new = malloc(sizeof(t_redirect));
+	new = ft_malloc(sizeof(t_redirect), &ptr_list);
 	new->fname = cur->next->str;
 	new->type = get_redirect_type(cur->str);
 	new->next = NULL;
@@ -40,7 +40,7 @@ t_cmd	*add_cmd(t_cmd_node *cur, t_cmd *prev, t_simplecmd *cmd)
 {
 	t_cmd	*new;
 
-	new = malloc(sizeof(t_cmd));
+	new = ft_malloc(sizeof(t_cmd), &ptr_list);
 	new->str = cur->str;
 	new->next = NULL;
 	if (prev)
@@ -54,7 +54,7 @@ t_simplecmd	*init_simplecmd(void)
 {
 	t_simplecmd	*new;
 
-	new = malloc(sizeof(t_simplecmd));
+	new = ft_malloc(sizeof(t_simplecmd), &ptr_list);
 	new->cmd = NULL;
 	new->redirect = NULL;
 	return (new);

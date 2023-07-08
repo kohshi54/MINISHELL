@@ -1,6 +1,5 @@
 #include "converter.h"
 
-
 char	*ft_strconnect(char *s1, char *s2, char *s3)
 {
 	size_t	len1;
@@ -13,7 +12,7 @@ char	*ft_strconnect(char *s1, char *s2, char *s3)
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	len3 = ft_strlen(s3);
-	ptr = malloc(sizeof(char) * (len1 + len2 + len3 + 1));
+	ptr = ft_malloc(sizeof(char) * (len1 + len2 + len3 + 1), &ptr_list);
 	if (!ptr)
 		return (NULL);
 	ft_memcpy(ptr, s1, len1);
@@ -21,7 +20,6 @@ char	*ft_strconnect(char *s1, char *s2, char *s3)
 	ft_memcpy(ptr + len1 + len3, s2, len2 + 1);
 	return (ptr);
 }
-
 
 int get_list_size(t_cmd_node *lst)
 {
