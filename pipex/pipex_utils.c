@@ -110,5 +110,9 @@ void execute_command(t_simplecmd *cur)
 	}
 	cmd = make_cmd_array(cur);
 	path = get_command_path(cmd[0]);
-	execve(path, cmd, environ);
+	if (execve(path, cmd, environ) == -1)
+	{
+		write(STDERR_FILENO, "command not found\n", 18);
+		exit(122);
+	}
 }
