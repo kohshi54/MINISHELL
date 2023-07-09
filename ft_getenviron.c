@@ -27,7 +27,7 @@ char	*ft_getenviron(char *key)
 		str = ft_split(environ[i], '=');
 		if (ft_strncmp(str[0], key, ft_strlen(str[0])) == 0)
 		{
-			ret = ft_strdup(str[1]);
+			ret = ft_strdup_gc(str[1], &ptr_list);
 			free_double(str);
 			return (ret);
 		}

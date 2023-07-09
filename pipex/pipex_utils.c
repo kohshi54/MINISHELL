@@ -35,7 +35,7 @@ char *get_command_path(char *command)
 		}
 		path_array++;
 	}
-	return ("not found");
+	return (NULL);
 }
 
 size_t count_node(t_simplecmd *cur)

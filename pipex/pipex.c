@@ -102,6 +102,8 @@ void	execute_one_simplecmd(t_simplecmd *cur)
 			close(here_pipe[READ]);
 		}
 		execute_command(cur);
+		exit(1);
+		system("leaks -q minishell");
 	}
 	close(here_pipe[READ]);
 	wait(&status);
