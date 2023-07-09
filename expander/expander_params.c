@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:15:29 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 19:11:14 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:39:15 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ char	*find_params_and_replace(char *line)
 
 void	execute_parameter_expansion(t_cmd_node *cur_cmd)
 {
-	char	*tmp;
-
 	while (cur_cmd)
 	{
 		if (cur_cmd->kind == ND_REDIRECTION && \
@@ -80,7 +78,6 @@ void	execute_parameter_expansion(t_cmd_node *cur_cmd)
 				continue ;
 			}
 		}
-		tmp = cur_cmd->str;
 		cur_cmd->str = find_params_and_replace(cur_cmd->str);
 		cur_cmd = cur_cmd->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_removal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:25:50 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 19:13:04 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/09 14:39:37 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ In minishell, single-quote and double-quote should be handled.
 
 void	execute_quote_removal(t_cmd_node *cur_cmd)
 {
-	char	*tmp;
-
 	while (cur_cmd)
 	{
 		ft_printf("before: %s\n", cur_cmd->str);
 		if (cur_cmd->str)
 		{
-			tmp = cur_cmd->str;
 			cur_cmd->str = removal(cur_cmd->str);
 		}
 		ft_printf("after: %s\n", cur_cmd->str);
@@ -40,8 +37,6 @@ void	execute_quote_removal(t_cmd_node *cur_cmd)
 
 void	remove_quote(t_node *cur)
 {
-	char	*tmp;
-
 	if (cur->left)
 		remove_quote(cur->left);
 	if (cur && cur->kind != ND_PIPE)
@@ -49,7 +44,6 @@ void	remove_quote(t_node *cur)
 	else
 	{
 		ft_printf("before: %s\n", cur->str);
-		tmp = cur->str;
 		cur->str = removal(cur->str);
 		ft_printf("after: %s\n", cur->str);
 	}
