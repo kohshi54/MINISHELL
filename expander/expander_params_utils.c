@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_params_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:52:08 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 19:11:44 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/08/20 19:51:15 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ char	*make_word(t_word *cur)
 	line = NULL;
 	while (cur)
 	{
-		ft_printf("str: %s\n", cur->str);
+		// ft_printf("str: %s\n", cur->str);
 		if (cur->in_single_quote == false && cur->str[0] == '$')
 			cur->str = ft_getenviron(&(cur->str[1]));
-		ft_printf("exp: %s\n", cur->str);
+		// ft_printf("exp: %s\n", cur->str);
 		if (cur->str)
 			line = ft_strjoin_null_accept(line, cur->str);
 		cur = cur->next;

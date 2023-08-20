@@ -49,11 +49,11 @@ int main(void)
 	token_list = tokenize(line);
 	if (token_list == NULL)
 		return (0);
-	print_token_list(token_list);
+	// print_token_list(token_list);
 	root = parse(token_list);
 	if (root == NULL)
 		return (0);
-	print_tree(root);
+	// print_tree(root);
 	root = expand(root);
 	cmds = converter(root);
 	// pipex(cmds, &varlist);

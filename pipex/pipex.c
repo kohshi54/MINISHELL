@@ -53,7 +53,7 @@ size_t get_node_count(t_simplecmd **cur)
 	i = 0;
 	while (*cur)
 	{
-		ft_printf("cmdname: %s, fname: %s, type: %d\n", (*cur)->cmd->str, (*cur)->redirect ? (*cur)->redirect->fname : NULL, (*cur)->redirect ? (*cur)->redirect->type : 0);
+		// ft_printf("cmdname: %s, fname: %s, type: %d\n", (*cur)->cmd->str, (*cur)->redirect ? (*cur)->redirect->fname : NULL, (*cur)->redirect ? (*cur)->redirect->type : 0);
 		cur++;
 		i++;
 	}
@@ -64,7 +64,7 @@ void execute_exit(t_simplecmd **cur)
 {
 	while (*cur && (*cur)->cmd)
 	{
-		ft_printf("cur->str; %s\n", (*cur)->cmd->str);
+		// ft_printf("cur->str; %s\n", (*cur)->cmd->str);
 		if (ft_strncmp((*cur)->cmd->str, "exit", 4) == 0)
 			exit(0);
 		cur++;
@@ -103,7 +103,7 @@ void	execute_one_simplecmd(t_simplecmd *cur)
 		}
 		execute_command(cur);
 		exit(1);
-		system("leaks -q minishell");
+		// system("leaks -q minishell");
 	}
 	close(here_pipe[READ]);
 	wait(&status);
@@ -149,7 +149,7 @@ int pipex(t_simplecmd **cur)
 
 	execute_exit(cur);
 	cmdnum = get_node_count(cur);
-	ft_printf("cmdnum: %d\n", cmdnum);
+	// ft_printf("cmdnum: %d\n", cmdnum);
 	if (cmdnum < 2)
 	{
 		execute_one_simplecmd(cur[0]);

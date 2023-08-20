@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   converter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 19:15:26 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 19:16:18 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/08/20 19:50:49 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,16 @@ void print_converted(t_simplecmd **cur)
 		cur_cmd = cur[i]->cmd;
 		while (cur_cmd)
 		{
-			ft_printf("cmd: %s\n", cur_cmd->str);
+			// ft_printf("cmd: %s\n", cur_cmd->str);
 			cur_cmd = cur_cmd->next;
 		}
 		cur_redirect = cur[i]->redirect;
 		while (cur_redirect)
 		{
-			ft_printf("redirect: %s, type: %d\n", cur_redirect->fname, cur_redirect->type);
+			// ft_printf("redirect: %s, type: %d\n", cur_redirect->fname, cur_redirect->type);
 			cur_redirect = cur_redirect->next;
 		}
-		printf("==\n");
+		// printf("==\n");
 		i++;
 	}
 }
@@ -142,8 +142,8 @@ t_simplecmd	**converter(t_node *cur)
 	i = 0;
 	make_double_array(cur, cmds, &i);
 	cmds[i] = NULL;
-	printf("====\n");
-	print_converted(cmds);
-	printf("====\n");
+	// printf("====\n");
+	// print_converted(cmds);
+	// printf("====\n");
 	return (cmds);
 }

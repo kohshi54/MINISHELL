@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:25:50 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/09 14:39:37 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/08/20 19:50:22 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	execute_quote_removal(t_cmd_node *cur_cmd)
 {
 	while (cur_cmd)
 	{
-		ft_printf("before: %s\n", cur_cmd->str);
+		// ft_printf("before: %s\n", cur_cmd->str);
 		if (cur_cmd->str)
 		{
 			cur_cmd->str = removal(cur_cmd->str);
 		}
-		ft_printf("after: %s\n", cur_cmd->str);
+		// ft_printf("after: %s\n", cur_cmd->str);
 		cur_cmd = cur_cmd->next;
 	}
 }
@@ -43,9 +43,9 @@ void	remove_quote(t_node *cur)
 		execute_quote_removal(cur->cmd);
 	else
 	{
-		ft_printf("before: %s\n", cur->str);
+		// ft_printf("before: %s\n", cur->str);
 		cur->str = removal(cur->str);
-		ft_printf("after: %s\n", cur->str);
+		// ft_printf("after: %s\n", cur->str);
 	}
 	if (cur->right)
 		remove_quote(cur->right);
