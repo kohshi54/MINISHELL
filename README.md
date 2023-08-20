@@ -1,1 +1,1 @@
-# MINISHELL one-cycle
+# MINISHELL one cycle
