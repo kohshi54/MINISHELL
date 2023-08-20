@@ -1,1 +1,1 @@
-# MINISHELL_COMP
+# MINISHELL one-cycle
