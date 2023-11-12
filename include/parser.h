@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kohshi54 <kohshi54@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 19:54:24 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 18:06:22 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:00:37 by kohshi54         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "../minishell.h"
+# include "minishell.h"
 
 extern char	**environ;
 

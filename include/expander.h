@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kohshi54 <kohshi54@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 21:12:41 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 18:05:23 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:02:15 by kohshi54         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANDER_H
 # define EXPANDER_H
 
-# include "../libft/libft.h"
-# include "../lexer/lexer.h"
-# include "../parser/parser.h"
-# include "../minishell.h"
+# include "libft.h"
+# include "lexer.h"
+# include "parser.h"
+# include "minishell.h"
 
 /* expander_params.c */
 char	*replace_params_to_value(char *line);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_gc_addft.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kohshi54 <kohshi54@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/15 14:36:19 by tyonezaw          #+#    #+#             */
+/*   Updated: 2023/11/13 07:48:45 by kohshi54         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strndup_gc(const char *s1, size_t n, t_list **list)
@@ -75,76 +87,4 @@ char	*ft_strjoin_gc(char const *s1, char const *s2, t_list **list)
 		*p++ = *s2++;
 	*p = '\0';
 	return (head);
-}
-
-static size_t	count_element(char const *s, char c)
-{
-	size_t	count;
-	size_t	i;
-	size_t	start;
-
-	count = 0;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		start = i;
-		while (s[i] != c && s[i] != '\0')
-			i++;
-		if (i == start)
-		{
-			i++;
-			continue ;
-		}
-		count++;
-		if (s[i] == '\0')
-			return (count);
-		i++;
-	}	
-	return (count);
-}
-
-char	**my_split_gc(const char *s, char c, char **p, size_t start, t_list **list)
-{
-	size_t	i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (s[i] != '\0')
-	{
-		start = i;
-		while (s[i] != c && s[i] != '\0')
-			i++;
-		if (i == start)
-		{
-			i++;
-			continue ;
-		}
-		p[count] = ft_malloc(sizeof(char) * (i - start + 1), list);
-		if (!p)
-			return (NULL);
-		ft_strlcpy(p[count], &s[start], (i - start + 1));
-		count++;
-		if (s[i++] == '\0')
-			break ;
-	}
-	p[count] = NULL;
-	return (&p[0]);
-}
-
-char	**ft_split_gc(char const *s, char c, t_list **list)
-{
-	char	**p;
-	size_t	start;
-
-	start = 0;
-	if (!s)
-		return (NULL);
-	p = ft_malloc(sizeof(char *) * (count_element(s, c) + 1), list);
-	if (!p)
-		return (NULL);
-	p = my_split_gc(s, c, p, start, list);
-	if (!p)
-		return (NULL);
-	return (p);
 }

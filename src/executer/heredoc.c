@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kohshi54 <kohshi54@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 07:55:25 by tyonezaw          #+#    #+#             */
-/*   Updated: 2023/07/08 20:00:08 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:14:08 by kohshi54         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Originally composed by my dear teammate tyonezaw. */
 
-#include "../minishell.h"
+#include "minishell.h"
 #include "pipex.h"
 
 static void write_list(t_list *list, int writefd)

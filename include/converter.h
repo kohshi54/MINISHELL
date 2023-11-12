@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   converter.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kohshi54 <kohshi54@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 19:13:52 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 19:14:43 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:01:14 by kohshi54         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONVERTER_H
 # define CONVERTER_H
 
-# include "../minishell.h"
-# include "../libft/libft.h"
-# include "../parser/parser.h"
+# include "minishell.h"
+# include "libft.h"
+# include "parser.h"
 
 typedef enum e_redirect_type
 {

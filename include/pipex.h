@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kohshi54 <kohshi54@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 21:04:14 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/07 21:06:23 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:01:42 by kohshi54         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../libft/libft.h"
-# include "../libft/ft_printf.h"
-# include "../converter/converter.h"
-# include "../minishell.h"
+# include "libft.h"
+# include "ft_printf.h"
+# include "converter.h"
+# include "minishell.h"
 # include <fcntl.h>
 
 typedef struct s_varlist

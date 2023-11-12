@@ -1,7 +1,11 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
-# -g -fsanitize=address
+DEPFLAGS = -MMD -MP -MF $(DEP_DIR)$*.d
+
+SRC_DIR		= src/
+OBJ_DIR		= obj/
+DEP_DIR		= dep/
 
 SRCS = 	main.c \
 		ft_readline.c \
@@ -21,35 +25,46 @@ SRCS = 	main.c \
 		expander/expander_removal_utils.c \
 		converter/converter.c \
 		converter/converter_utils.c \
-		pipex/pipex.c \
-		pipex/pipex_utils.c \
-		pipex/heredoc.c
+		executer/pipex.c \
+		executer/pipex_utils.c \
+		executer/heredoc.c
 
-OBJS = $(SRCS:%.c=%.o)
+OBJS = $(addprefix $(OBJ_DIR), $(SRCS:%.c=%.o))
+DEPS = $(addprefix $(DEP_DIR), $(SRCS:%.c=%.d))
 
-LIBFT = LIBFT/libft.a
-LIBFTDIR = LIBFT/
-
-INCLUDES = minishell.h
+LIBFT = libft.a
+LIBFTDIR = src/libft/
 
 LIBFLAGS = -L./$(LIBFTDIR) -lft -lreadline
 
-all : $(NAME)
+INCLUDES = -I./include -I./$(LIBFTDIR)/include
+vpath %.c $(SRC_DIR)
 
-$(NAME) : $(OBJS) $(LIBFT) minishell.h
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFLAGS) -o $(NAME)
+all :  $(OBJ_DIR) $(DEP_DIR) $(NAME)
+
+$(OBJ_DIR) $(DEP_DIR) :
+	@mkdir -p $@
+	@mkdir -p obj/lexer/ obj/parser/ obj/expander/ obj/converter/ obj/executer/
+
+$(OBJ_DIR)%.o: %.c
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(INCLUDES) -c $< -o $@
+
+$(NAME) : $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBFLAGS) -o $(NAME)
 
 $(LIBFT) : $(LIBFTDIR)
 	$(MAKE) -C $(LIBFTDIR)
 
-clean :
-	rm -f $(OBJS)
-	$(MAKE) clean -C $(LIBFTDIR)
+clean : 
+	rm -rf $(OBJS) $(DEPS) $(DEP_DIR) $(OBJ_DIR)
+	rm -rf build
 
 fclean : clean
 	rm -f $(NAME)
 	$(MAKE) fclean -C $(LIBFTDIR)
 
 re : fclean all
+
+-include $(DEPS)
 
 .PHONY : clean fclean re all

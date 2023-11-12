@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kohshi54 <kohshi54@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 19:09:43 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/08 18:03:22 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:02:22 by kohshi54         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define LEXER_H
 
 # include <stdlib.h>
-# include "../libft/ft_printf.h"
-# include "../libft/libft.h"
-# include "../minishell.h"
+# include "ft_printf.h"
+# include "libft.h"
+# include "minishell.h"
 
 /* lexer.c */
 t_token	*tokenize(char *line);

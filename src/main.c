@@ -58,7 +58,7 @@ int main(void)
 	cmds = converter(root);
 	// pipex(cmds, &varlist);
 	pipex(cmds);
-	free_all_mallocated_area(ptr_list);
+	free_all_mallocated_area(&ptr_list);
 	free(line);
 	return (0);
 }
