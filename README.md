@@ -1,1 +1,3 @@
-# MINISHELL one cycle
+# MINISHELL
+
+Implementation of bash-like shell.
