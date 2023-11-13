@@ -40,4 +40,13 @@ The shell can be invoked from the terminal. Once started, it operates by reading
 - The shell does not implement built-in commands and relies entirely on external commands for functionality.
 
 ## Installation and Running
-make
+To install MINISHELL, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Navigate to the cloned directory.
+3. Run `make` to compile the shell.
+
+To start MINISHELL, run the following command in the terminal after compilation:
+
+```bash
+./minishell
