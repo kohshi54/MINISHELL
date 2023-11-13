@@ -44,22 +44,25 @@ int main(void)
 	// t_varlist	varlist;
 
 	ptr_list = NULL;
-	line = wrap_readline(NULL);
-	// printf("%s\n", line);
-	token_list = tokenize(line);
-	if (token_list == NULL)
-		return (0);
-	// print_token_list(token_list);
-	root = parse(token_list);
-	if (root == NULL)
-		return (0);
-	// print_tree(root);
-	root = expand(root);
-	cmds = converter(root);
-	// pipex(cmds, &varlist);
-	pipex(cmds);
-	free_all_mallocated_area(&ptr_list);
-	free(line);
+	while (1)
+	{
+		line = wrap_readline(NULL);
+		// printf("%s\n", line);
+		token_list = tokenize(line);
+		if (token_list == NULL)
+			return (0);
+		// print_token_list(token_list);
+		root = parse(token_list);
+		if (root == NULL)
+			return (0);
+		// print_tree(root);
+		root = expand(root);
+		cmds = converter(root);
+		// pipex(cmds, &varlist);
+		pipex(cmds);
+		free_all_mallocated_area(&ptr_list);
+		free(line);
+	}
 	return (0);
 }
 
